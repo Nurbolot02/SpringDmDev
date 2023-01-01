@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <context:annotation-config/>
+    <context:property-placeholder location="classpath:application.properties"/>
+
+
+<!--    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
+
+
+<!--    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >-->
+<!--        <property name="locations" value="application.properties"/>-->
+<!--    </bean>-->
+
+    <bean class="org.ntg.bpp.InjectBeanPostProcessor"/>
+
+    <bean name="companyRepository" class="org.ntg.database.repository.CompanyRepository"/>
+    <bean class="org.ntg.bpp.TransactionBeanPostProcessor"/>
+
+    <bean id="driver" class="java.lang.String">
+        <constructor-arg value="${db.name}"/>
+    </bean>
+
+    <bean class="org.ntg.bfpp.LogBeanFactoryPostProcessor"/>
+    <bean class="org.ntg.bfpp.VerifyPropertyFactoryPostProcessor"/>
+
+    <bean id="pool1" name="p1,p2" class="org.ntg.database.pool.ConnectionPool">
+        <constructor-arg name="userName" value="Ntg"/>
+        <constructor-arg name="size" value="0"/>
+        <constructor-arg name="args">
+            <list>
+                <value></value>
+            </list>
+        </constructor-arg>
+        <constructor-arg name="properties">
+            <map>
+                <entry key="0" value="kkk"/>
+                <entry key="5" value="${db.password}"/>
+            </map>
+        </constructor-arg>
+        <property name="size" value="5"/>
+    </bean>
+<!--    <bean id="pool2" name="p3" class="org.ntg.database.pool.ConnectionPool"/>-->
+
+</beans>
