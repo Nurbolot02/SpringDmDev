@@ -1,30 +1,25 @@
 package org.ntg.database.pool;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.util.List;
-import java.util.Map;
-
+@Component("pool1")
 public class ConnectionPool {
     private final String userName;
     private int size;
-    private final List<Object> args;
-    private final Map<String, Object> properties;
 
-    public ConnectionPool(String userName, int size, List<Object> args, Map<String, Object> properties) {
+    public ConnectionPool(
+            @Value("${db.username}") String userName,
+            @Value("${db.poolSize}") int size) {
         this.userName = userName;
         this.size = size;
-        this.args = args;
-        this.properties = properties;
     }
 
     @PostConstruct
     public void init(){
         System.out.println("init method");
-    }
-
-    public int getSize() {
-        return size;
     }
 
     public void setSize(int size) {
