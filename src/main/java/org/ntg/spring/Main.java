@@ -3,7 +3,9 @@ package org.ntg.spring;
 import org.ntg.spring.config.ApplicationConfiguration;
 import org.ntg.spring.database.pool.ConnectionPool;
 import org.ntg.spring.database.repository.CrudRepository;
+import org.ntg.spring.dto.CompanyReadDto;
 import org.ntg.spring.entity.Company;
+import org.ntg.spring.service.CompanyService;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -26,10 +28,10 @@ public class Main {
             AtomicReference<String> driver = new AtomicReference<>(context.getBean("driver", String.class));
             System.out.println(driver.get());
 
-            var companyRepository = context.getBean("companyRepository", CrudRepository.class);
-            Optional<Company> companyRepositoryById = companyRepository.findById(1L);
+            var companyService = context.getBean("companyService", CompanyService.class);
+            Optional<CompanyReadDto> companyRepositoryById = companyService.findById(1L);
             System.out.println(companyRepositoryById);
-            System.out.println(companyRepository.deleteById(1L));
+            companyService.deleteById(1L);
 
 
             System.out.println("${driver.get()}");
