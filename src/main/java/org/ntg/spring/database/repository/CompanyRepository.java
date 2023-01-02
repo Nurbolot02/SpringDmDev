@@ -1,8 +1,8 @@
-package org.ntg.database.repository;
+package org.ntg.spring.database.repository;
 
-import org.ntg.bpp.TransactionN;
-import org.ntg.database.pool.ConnectionPool;
-import org.ntg.entity.Company;
+import org.ntg.spring.bpp.TransactionN;
+import org.ntg.spring.database.pool.ConnectionPool;
+import org.ntg.spring.entity.Company;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 

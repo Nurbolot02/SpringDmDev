@@ -1,4 +1,4 @@
-package org.ntg.bpp;
+package org.ntg.spring.bpp;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

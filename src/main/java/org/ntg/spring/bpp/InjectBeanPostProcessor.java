@@ -1,4 +1,4 @@
-package org.ntg.bpp;
+package org.ntg.spring.bpp;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

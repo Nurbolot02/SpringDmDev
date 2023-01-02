@@ -1,14 +1,12 @@
-package org.ntg;
+package org.ntg.spring;
 
-import org.ntg.database.pool.ConnectionPool;
-import org.ntg.database.repository.CompanyRepository;
-import org.ntg.database.repository.CrudRepository;
-import org.ntg.entity.Company;
+import org.ntg.spring.config.ApplicationConfiguration;
+import org.ntg.spring.database.pool.ConnectionPool;
+import org.ntg.spring.database.repository.CrudRepository;
+import org.ntg.spring.entity.Company;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -20,7 +18,7 @@ public class Main {
         System.out.println(BeanFactoryPostProcessor.class.isAssignableFrom(val.getClass()));
 
         ConnectionPool bean;
-        try (var context = new ClassPathXmlApplicationContext("application.xml")) {
+        try (var context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class)) {
             bean = context.getBean("pool1", ConnectionPool.class);
             System.out.println(bean);
 

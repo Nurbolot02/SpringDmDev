@@ -1,4 +1,4 @@
-package org.ntg.database.repository;
+package org.ntg.spring.database.repository;
 
 import java.util.Optional;
 

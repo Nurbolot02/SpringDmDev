@@ -1,4 +1,4 @@
-package org.ntg.ntg;
+package org.ntg.spring.ntg;
 
 import java.lang.ref.Reference;
 import java.util.ArrayDeque;
