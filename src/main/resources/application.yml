@@ -1,0 +1,17 @@
+db:
+  name: postgres
+  username: ${user.name.value:postgres}
+  password: 123456
+
+  properties:
+    first: 123
+    second: value
+    third.value: Third
+  pool:
+    size: 10
+    timeout: 5
+  pools:
+    - size: 1
+      timeout: 1
+    - size: 2
+      timeout: 2

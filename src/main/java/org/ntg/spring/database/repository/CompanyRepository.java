@@ -1,5 +1,6 @@
 package org.ntg.spring.database.repository;
 
+import lombok.RequiredArgsConstructor;
 import org.ntg.spring.bpp.TransactionN;
 import org.ntg.spring.database.pool.ConnectionPool;
 import org.ntg.spring.entity.Company;
@@ -12,20 +13,12 @@ import java.util.List;
 import java.util.Optional;
 @TransactionN
 @Repository
+@RequiredArgsConstructor
 public class CompanyRepository implements CrudRepository<Long, Company> {
     private ConnectionPool connectionPool;
-
+    @Value("${db.poolSize}")
     private int dbPoolSize;
     private List<ConnectionPool> connectionPools;
-
-    public CompanyRepository(
-            ConnectionPool connectionPool,
-            @Value("${db.poolSize}") int dbPoolSize,
-            List<ConnectionPool> connectionPools) {
-        this.connectionPool = connectionPool;
-        this.dbPoolSize = dbPoolSize;
-        this.connectionPools = connectionPools;
-    }
 
     @Override
     public Optional<Company> findById(Long id) {
