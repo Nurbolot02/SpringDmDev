@@ -1,6 +1,7 @@
 package org.ntg.spring.database.repository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.ntg.spring.bpp.TransactionN;
 import org.ntg.spring.database.pool.ConnectionPool;
 import org.ntg.spring.entity.Company;
@@ -11,9 +12,11 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.List;
 import java.util.Optional;
+
 @TransactionN
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class CompanyRepository implements CrudRepository<Long, Company> {
     private ConnectionPool connectionPool;
     @Value("${db.poolSize}")
@@ -22,23 +25,23 @@ public class CompanyRepository implements CrudRepository<Long, Company> {
 
     @Override
     public Optional<Company> findById(Long id) {
-        System.out.println("find by id method ...");
+        log.info("find by id method ...");
         return Optional.of(new Company(id));
     }
 
     @Override
     public boolean deleteById(Long id) {
-        System.out.println("delete method ...");
+        log.info("delete method ...");
         return false;
     }
 
     @PostConstruct
     private void init(){
-        System.out.println("Init company repository");
+        log.info("Init company repository");
     }
 
     @PreDestroy
     private void destroy(){
-        System.out.println("destroy company repository");
+        log.info("destroy company repository");
     }
 }

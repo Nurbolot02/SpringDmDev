@@ -1,8 +1,7 @@
 package org.ntg.spring.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.ntg.spring.config.condition.JpaCondition;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,6 +9,7 @@ import javax.annotation.PostConstruct;
 
 @Conditional(JpaCondition.class)
 @Configuration
+@Slf4j
 public class JpaConfiguration {
 //    @Bean
 //    @ConfigurationProperties(prefix = "db")
@@ -18,6 +18,6 @@ public class JpaConfiguration {
 //    }
     @PostConstruct
     private void init(){
-        System.out.println("JpaConfiguration is enabled");
+        log.info("JpaConfiguration is enabled");
     }
 }

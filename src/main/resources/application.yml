@@ -15,3 +15,6 @@ db:
       timeout: 1
     - size: 2
       timeout: 2
+logging:
+  level:
+    org.ntg: trace
