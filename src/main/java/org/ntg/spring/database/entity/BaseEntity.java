@@ -1,4 +1,4 @@
-package org.ntg.spring.entity;
+package org.ntg.spring.database.entity;
 
 public interface BaseEntity<T> {
     T getId();

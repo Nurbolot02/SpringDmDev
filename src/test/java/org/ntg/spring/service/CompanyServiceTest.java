@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.ntg.spring.database.repository.CrudRepository;
 import org.ntg.spring.dto.CompanyReadDto;
-import org.ntg.spring.entity.Company;
+import org.ntg.spring.database.entity.Company;
 import org.ntg.spring.listeners.entity.EntityEvent;
 import org.springframework.context.ApplicationEventPublisher;
 
@@ -18,19 +18,19 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CompanyServiceTest {
-    private static final long COMPANY_ID = 1;
+    private static final int COMPANY_ID = 1;
     @Mock
     private ApplicationEventPublisher applicationEventPublisher;
     @Mock
     private UserService userService;
     @Mock
-    private CrudRepository<Long, Company> companyCrudRepository;
+    private CrudRepository<Integer, Company> companyCrudRepository;
     @InjectMocks
     private CompanyService companyService;
 
     @Test
     void findById() {
-        doReturn(Optional.of(new Company(COMPANY_ID)))
+        doReturn(Optional.of(new Company((int) COMPANY_ID, "facebook")))
                 .when(companyCrudRepository).findById(COMPANY_ID);
 
         Optional<CompanyReadDto> actualResult = companyService.findById(COMPANY_ID);

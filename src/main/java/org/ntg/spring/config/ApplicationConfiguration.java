@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 //                @ComponentScan.Filter(type = FilterType.REGEX, pattern = "org\\..+Repository")
 //        }
 //)
+@ComponentScan()
 public class ApplicationConfiguration {
         @Bean(name = "driver")
         public String getDriver(@Value("${db.name}") String dbName){

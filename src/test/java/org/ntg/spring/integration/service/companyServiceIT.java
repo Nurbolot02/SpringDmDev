@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 @ActiveProfiles("test")
 public class companyServiceIT {
-    private static final long COMPANY_ID = 1;
+    private static final int COMPANY_ID = 1;
     @Autowired
     private CompanyService companyService;
     @Autowired
