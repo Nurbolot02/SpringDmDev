@@ -2,24 +2,29 @@ package org.ntg.spring.integration.service;
 
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.ntg.spring.TestApplicationRunner;
 import org.ntg.spring.database.pool.ConnectionPool;
+import org.ntg.spring.integration.annotation.IntegrationTest;
 import org.ntg.spring.service.UserService;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestConstructor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-@SpringBootTest(classes = TestApplicationRunner.class)
-@ActiveProfiles("test")
+@IntegrationTest
+@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @RequiredArgsConstructor
+//@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class UserServiceIT {
     private final UserService userService;
-    private final ConnectionPool pool5;
+    @SpyBean(name = "pool1")
+    private ConnectionPool pool1;
 
     @Test
     void test() {
+        System.out.println();
+    }
+
+    @Test
+    void test2() {
         System.out.println();
     }
 }

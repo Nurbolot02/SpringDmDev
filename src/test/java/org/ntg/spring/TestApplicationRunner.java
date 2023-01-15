@@ -6,6 +6,6 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 
 @TestConfiguration
 public class TestApplicationRunner {
-    @SpyBean(name = "pool5")
-    private ConnectionPool pool5;
+    @SpyBean(name = "pool2")
+    private ConnectionPool pool2;
 }
