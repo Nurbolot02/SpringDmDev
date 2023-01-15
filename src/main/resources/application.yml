@@ -16,17 +16,23 @@ db:
       timeout: 1
     - size: 2
       timeout: 2
+
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: 123456
-    url: jdbc:postgresql://localhost:5433/postgres
+    url: jdbc:postgresql://localhost:5433/dmdev_spring
   jpa:
     properties:
       hibernate:
         show_sql: true
         format_sql: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
 
 logging:
   level:

@@ -2,6 +2,7 @@ package org.ntg.spring.database.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -9,18 +10,15 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -30,26 +28,26 @@ import java.util.Objects;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Company implements BaseEntity<Integer> {
+public class Chat implements BaseEntity<Long> {
     @Id
-    @SequenceGenerator(name = "company_id_seq_gen", sequenceName = "company_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company_id_seq_gen")
+    @SequenceGenerator(name = "chat_id_seq_gen", sequenceName = "chat_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "chat_id_seq_gen")
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
+    @Column(name = "name")
     private String name;
+
     @Builder.Default
-    @ElementCollection
-    @CollectionTable(name = "company_locales", joinColumns = @JoinColumn(name = "company_id"))
-    @MapKeyColumn(name = "lang")
-    @Column(name = "description")
-    private Map<String, String> locales = new HashMap<>();
+    @OneToMany(mappedBy = "chat")
+    @ToString.Exclude
+    private List<UserChat> userChats = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Company company = (Company) o;
-        return id != null && Objects.equals(id, company.id);
+        Chat chat = (Chat) o;
+        return id != null && Objects.equals(id, chat.id);
     }
 
     @Override

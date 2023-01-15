@@ -9,18 +9,15 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapKeyColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 @Getter
@@ -30,26 +27,24 @@ import java.util.Objects;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Company implements BaseEntity<Integer> {
+public class Payment implements BaseEntity<Long> {
     @Id
-    @SequenceGenerator(name = "company_id_seq_gen", sequenceName = "company_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company_id_seq_gen")
+    @SequenceGenerator(name = "payment_id_seq_gen", sequenceName = "payment_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_id_seq_gen")
     @Column(name = "id", nullable = false)
-    private Integer id;
-    private String name;
-    @Builder.Default
-    @ElementCollection
-    @CollectionTable(name = "company_locales", joinColumns = @JoinColumn(name = "company_id"))
-    @MapKeyColumn(name = "lang")
-    @Column(name = "description")
-    private Map<String, String> locales = new HashMap<>();
+    private Long id;
+    private Integer amount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "receiver_id")
+    @ToString.Exclude
+    private User receiver;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Company company = (Company) o;
-        return id != null && Objects.equals(id, company.id);
+        Payment payment = (Payment) o;
+        return id != null && Objects.equals(id, payment.id);
     }
 
     @Override

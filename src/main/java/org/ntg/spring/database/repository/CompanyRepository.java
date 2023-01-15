@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class CompanyRepository implements CrudRepository<Integer, Company> {
     @Override
     public Optional<Company> findById(Integer id) {
         log.info("find by id method ...");
-        return Optional.of(new Company(id.intValue(), "optional company"));
+        return Optional.of(new Company(id.intValue(), "optional company", Collections.emptyMap()));
     }
 
     @Override
