@@ -11,6 +11,7 @@ import org.ntg.spring.database.entity.Company;
 import org.ntg.spring.listeners.entity.EntityEvent;
 import org.springframework.context.ApplicationEventPublisher;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +31,7 @@ class CompanyServiceTest {
 
     @Test
     void findById() {
-        doReturn(Optional.of(new Company((int) COMPANY_ID, "facebook")))
+        doReturn(Optional.of(new Company((int) COMPANY_ID, "facebook", Collections.emptyMap()) ))
                 .when(companyCrudRepository).findById(COMPANY_ID);
 
         Optional<CompanyReadDto> actualResult = companyService.findById(COMPANY_ID);
