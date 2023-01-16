@@ -5,11 +5,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.ntg.spring.database.repository.CrudRepository;
+import org.ntg.spring.database.repository.CompanyRepository;
 import org.ntg.spring.dto.CompanyReadDto;
 import org.ntg.spring.database.entity.Company;
 import org.ntg.spring.listeners.entity.EntityEvent;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -25,14 +26,14 @@ class CompanyServiceTest {
     @Mock
     private UserService userService;
     @Mock
-    private CrudRepository<Integer, Company> companyCrudRepository;
+    private CompanyRepository companyRepository;
     @InjectMocks
     private CompanyService companyService;
 
     @Test
     void findById() {
         doReturn(Optional.of(new Company((int) COMPANY_ID, "facebook", Collections.emptyMap()) ))
-                .when(companyCrudRepository).findById(COMPANY_ID);
+                .when(companyRepository).findById(COMPANY_ID);
 
         Optional<CompanyReadDto> actualResult = companyService.findById(COMPANY_ID);
         assertTrue(actualResult.isPresent());
